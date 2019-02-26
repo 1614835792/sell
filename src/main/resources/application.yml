@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  context-path: /sell
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.1.112/sell?characterEncoding=utf-8&useSSL=false
+  jpa:
+     show-sql:true
+wechat:
+  mpAppId: wxeee4ab69fc90df52
+  mpAppSecret: 2303d7a78c460bf542941cd5b967b8b4
+#  jackson:
+#    default-property-inclusion: non_null
+
+#logging:
+#  pattern:
+#    console: "%d - msg%n"
+#  path: /var/log/tomcat/
+#  file: /var/log/tomcat/sell.log
+#  level: debug
