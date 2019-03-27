@@ -9,11 +9,14 @@ import com.imooc.sell.dto.OrderDTO;
 import com.imooc.sell.enums.OrderStatusEnum;
 import com.imooc.sell.enums.PayStatusEnum;
 import com.imooc.sell.enums.ResultEnum;
+import com.imooc.sell.exception.ResponseBanKException;
 import com.imooc.sell.exception.SellException;
 import com.imooc.sell.repository.OrderDetailRepository;
 import com.imooc.sell.repository.OrderMasterRepository;
 import com.imooc.sell.service.OrderService;
 import com.imooc.sell.service.ProductService;
+import com.imooc.sell.service.PushMessageService;
+import com.imooc.sell.service.WebSocket;
 import com.imooc.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -39,6 +42,10 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailRepository orderDetailRepository;
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+    @Autowired
+    private PushMessageService pushMessageService;
+    @Autowired
+    private WebSocket webSocket;
     String orderId=KeyUtil.genUnique();
     @Override
     @Transactional
@@ -50,7 +57,8 @@ public class OrderServiceImpl implements OrderService {
         for(OrderDetail orderDetail:orderDTO.getOrderDetailList()){
             ProductInfo productInfo=productService.findOne(orderDetail.getProductId());
             if(productInfo==null){
-                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+               // throw new ResponseBanKException();
             }
             // 2.计算订单总价
             orderAmount= (productInfo.getProductPrice().multiply(new BigDecimal(orderDetail.getProductQuantity()))).add(orderAmount);
@@ -77,6 +85,8 @@ public class OrderServiceImpl implements OrderService {
         List<CartDTO> cartDTOList= orderDTO.getOrderDetailList().stream().map(e->
                 new CartDTO(e.getProductId(),e.getProductQuantity())).collect(Collectors.toList());
         productService.decreaseStock(cartDTOList);
+        //发送websocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
         return orderDTO;
     }
 
@@ -154,6 +164,8 @@ public class OrderServiceImpl implements OrderService {
             log.error("[完结订单]更新失败，orderMaster={}",orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+        //推送微信模板消息
+        pushMessageService.orderStatus(orderDTO);
         return orderDTO;
     }
 

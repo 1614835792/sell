@@ -6,18 +6,44 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.1.112/sell?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.1.185/sell?characterEncoding=utf-8&useSSL=false
   jpa:
      show-sql:true
+  redis:
+    host: 192.168.1.185
+    port: 6379
+
+    #  jackson:
+    #    default-property-inclusion: non_null
+
+    #logging:
+    #  pattern:
+    #    console: "%d - msg%n"
+    #  path: /var/log/tomcat/
+    #  file: /var/log/tomcat/sell.log
+    #  level: debug
+
 wechat:
   mpAppId: wxeee4ab69fc90df52
   mpAppSecret: 2303d7a78c460bf542941cd5b967b8b4
-#  jackson:
-#    default-property-inclusion: non_null
+  openAppId: wxeee4ab69fc90df52
+  openSecret: 2303d7a78c460bf542941cd5b967b8b4
+  openAppSecrect : 251515134wsedw
+  mchId: 45454555
+  mchKey: 45454551
+  KeyPath: /var/weixin_cert/h5.p12
+  notifyUrl: http://gsell.natapp1.cc/sell/pay/notify
+  templateId:
+    orderStatus: e-ceflkfeke-23d-erer-e
 
-#logging:
-#  pattern:
-#    console: "%d - msg%n"
-#  path: /var/log/tomcat/
-#  file: /var/log/tomcat/sell.log
-#  level: debug
+projectUrl:
+  wechatMpAuthorize: gsell.natapp1.cc
+  wechatOpenAuthorize: gsell.natapp1.cc
+  sell: gsell.natapp1.cc
+logging:
+  level:
+     com.imooc.dataobject.mapper: trace
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+

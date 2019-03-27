@@ -1,7 +1,6 @@
 package com.imooc.sell.service.Impl;
 
 import com.imooc.sell.dataobject.OrderDetail;
-import com.imooc.sell.dataobject.OrderMaster;
 import com.imooc.sell.dto.OrderDTO;
 import com.imooc.sell.enums.OrderStatusEnum;
 import com.imooc.sell.enums.PayStatusEnum;
