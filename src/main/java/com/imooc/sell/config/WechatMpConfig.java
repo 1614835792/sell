@@ -20,19 +20,9 @@ public class WechatMpConfig {
     }
     @Bean
     public WxMpConfigStorage wxMpConfigStorage(){
-        WxMpInMemoryConfigStorage wxMpConfigStorage=new WxMpInMemoryConfigStorage();
-        wxMpConfigStorage.setAppId(wechatAccountConfig.getMpAppId());
-        wxMpConfigStorage.setSecret(wechatAccountConfig.getMpAppSecret());
-        return wxMpConfigStorage;
+        WxMpInMemoryConfigStorage wxMpInMemoryConfigStorage=new WxMpInMemoryConfigStorage();
+        wxMpInMemoryConfigStorage.setAppId(wechatAccountConfig.getMpAppId());
+        wxMpInMemoryConfigStorage.setSecret(wechatAccountConfig.getMpAppSecret());
+        return wxMpInMemoryConfigStorage;
     }
-    /*public static void main(String args[]){
-        Boolean b1=new Boolean(true);
-        Boolean b2=new Boolean(true);
-        System.out.println(b1==b2);    //false
-        System.out.println(b1.equals(b2)); //true
-        Object o1=b1;
-        Object o2=b2;
-        System.out.println(o1==o2);  //false
-        System.out.println(o1.equals(o2)); //true
-    }*/
 }

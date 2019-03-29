@@ -13,10 +13,7 @@ import com.imooc.sell.exception.ResponseBanKException;
 import com.imooc.sell.exception.SellException;
 import com.imooc.sell.repository.OrderDetailRepository;
 import com.imooc.sell.repository.OrderMasterRepository;
-import com.imooc.sell.service.OrderService;
-import com.imooc.sell.service.ProductService;
-import com.imooc.sell.service.PushMessageService;
-import com.imooc.sell.service.WebSocket;
+import com.imooc.sell.service.*;
 import com.imooc.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -46,6 +43,8 @@ public class OrderServiceImpl implements OrderService {
     private PushMessageService pushMessageService;
     @Autowired
     private WebSocket webSocket;
+    @Autowired
+    private PayService payService;
     String orderId=KeyUtil.genUnique();
     @Override
     @Transactional
@@ -142,7 +141,7 @@ public class OrderServiceImpl implements OrderService {
         productService.increaseStock(cartDTOList);
         //如果已支付，需要退款
         if(orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
-            //TODO
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }

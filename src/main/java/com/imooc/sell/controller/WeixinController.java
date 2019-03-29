@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class WeixinController {
     @GetMapping("/auth")
-    public void auth(@RequestParam("code")String code){
+    public void auth(@RequestParam("code") String code){
         log.info("进入auth方法。。。");
         log.info("code={}",code);
         String url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxeee4ab69fc90df52&secret=2303d7a78c460bf542941cd5b967b8b4&code="+code+"&grant_type=authorization_code";

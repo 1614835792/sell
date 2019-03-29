@@ -56,8 +56,6 @@ public class WechatController {
     @GetMapping("/qrAuthorize")
     public String qrAuthorize(@RequestParam("returnUrl")String returnUrl){
         String url=projectUrlConfig.wechatOpenAuthorize+"/sell/wechat/qruserInfo";
-           // String url=returnUrl;
-
         String redirectUrl=wxOpenService.buildQrConnectUrl(url,WxConsts.QRCONNECT_SCOPE_SNSAPI_LOGIN,URLEncoder.encode(returnUrl));
         return "redirect:"+redirectUrl;
     };

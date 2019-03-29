@@ -22,8 +22,6 @@ public class WechatAccountConfig {
     @Value("openAppId")
     private String openAppId;
     /*开放平台密钥*/
-    @Value("openSecret")
-    private String openSecret;
     @Value("openAppSecrect")
     private String openAppSecret;
     /*商户号*/

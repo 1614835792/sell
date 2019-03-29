@@ -26,8 +26,7 @@ spring:
 wechat:
   mpAppId: wxeee4ab69fc90df52
   mpAppSecret: 2303d7a78c460bf542941cd5b967b8b4
-  openAppId: wxeee4ab69fc90df52
-  openSecret: 2303d7a78c460bf542941cd5b967b8b4
+  openAppId: wx6ad144e54af67d87
   openAppSecrect : 251515134wsedw
   mchId: 45454555
   mchKey: 45454551
@@ -37,9 +36,9 @@ wechat:
     orderStatus: e-ceflkfeke-23d-erer-e
 
 projectUrl:
-  wechatMpAuthorize: gsell.natapp1.cc
-  wechatOpenAuthorize: gsell.natapp1.cc
-  sell: gsell.natapp1.cc
+  wechatMpAuthorize: http://gsell.natapp1.cc
+  wechatOpenAuthorize: http://gsell.natapp1.cc
+  sell: http://gsell.natapp1.cc
 logging:
   level:
      com.imooc.dataobject.mapper: trace
